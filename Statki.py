@@ -1,7 +1,15 @@
 import pygame
 import sys
 
-pygame.init() #musi być
+pygame.init() #musi być...
+
+def granicePlanszy(pozycja):
+    if pozycja >= 900:
+        pozycja = 0
+    if pozycja < 0:
+        pozycja = 900
+    return pozycja
+
 wielkoscOkna = (900,900)
 obraz = pygame.display.set_mode(wielkoscOkna)
 statek_1 = pygame.Rect(50,450,50,50)
@@ -65,47 +73,10 @@ while True:
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
         statek_2.x += 1
 
-    #if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-       # statek_1 = pygame.Rect(450,450,50,50)
-
-   # if event.type == pygame.KEYDOWN and event.key == pygame.K_f:
-    #    statek_1 = pygame.Rect(450,450,50,50)
-
-    #if pygame.key.get_pressed()[pygame.K_k]:
-     #   x += 1
-
-      #  statek_1 = pygame.Rect(statek_1.x,statek_1.y,x,x)
-
-    #if pygame.key.get_pressed()[pygame.K_l]:
-     #   if x > 0:
-      #      x -= 1
-       # statek_1 = pygame.Rect(statek_1.x,statek_1.y,x,x)
-    if statek_1.x >= 900:
-        statek_1.x = 0
-
-    if statek_1.y >= 900:
-        statek_1.y = 0
-
-    if statek_1.x < 0:
-            statek_1.x = 900
-
-    if statek_1.y < 0:
-            statek_1.y = 900
-
-    if statek_2.x >= 900:
-        statek_2.x = 0
-
-    if statek_2.y >= 900:
-        statek_2.y = 0
-
-    if statek_2.x < 0:
-        statek_2.x = 900
-
-    if statek_2.y < 0:
-        statek_2.y = 900
-
-    #pocisk_1.x += 1
-    #rysunek
+    statek_1.x = granicePlanszy(statek_1.x)
+    statek_1.y = granicePlanszy(statek_1.y)
+    statek_2.x = granicePlanszy(statek_2.x)
+    statek_2.y = granicePlanszy(statek_2.y)
 
     pygame.draw.rect(obraz, (255, 0, 0), statek_1)
     pygame.draw.rect(obraz, (0, 0, 255), statek_2)
