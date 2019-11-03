@@ -4,7 +4,7 @@ import random
 
 pygame.init()  # musi być
 pygame.display.set_caption('Statki')
-a = pygame.image.load('Logo.png')
+a = pygame.image.load('Grafa/Logo.png')
 pygame.display.set_icon(a)
 
 #moduł ze zmiennymi
@@ -21,6 +21,7 @@ zyciegracza2=szerokoscOkna-200
 timer_strzalu=0
 timer_strzalu2=0
 opcjemenu=0
+zmiennabreak=0
 pociskikolor=[]
 my_missile_list=[]
 
@@ -29,28 +30,29 @@ killBlue = 0
 kolorNapisu = (255, 255, 0)
 czcionka = pygame.font.SysFont("Comic Sans MS", 60)
 
-background = pygame.image.load("background.jpg").convert()
-menu = pygame.image.load("backgroundmenu.jpg").convert()
-settings= pygame.image.load('settings.jpg').convert()
-przyciskback= pygame.image.load('przyciskback.png')
-przycisksettings=pygame.image.load('przycisksettings.png')
-przyciskstart=pygame.image.load('przyciskstart.png')
-przyciskexit=pygame.image.load('przyciskexit.png')
-pustemenu=pygame.image.load('pustemenu.jpg')
-statekGrafika_1 = pygame.image.load("Statek1-Blue.png")
+background = pygame.image.load("Grafa/background.jpg").convert()
+menu = pygame.image.load("Grafa/backgroundmenu.jpg").convert()
+settings= pygame.image.load('Grafa/settings.jpg').convert()
+przyciskback= pygame.image.load('Grafa/przyciskback.png')
+przycisksettings=pygame.image.load('Grafa/przycisksettings.png')
+przyciskstart=pygame.image.load('Grafa/przyciskstart.png')
+przyciskexit=pygame.image.load('Grafa/przyciskexit.png')
+pustemenu=pygame.image.load('Grafa/pustemenu.jpg')
+tabela=pygame.image.load('Grafa/tabela.png')
+statekGrafika_1 = pygame.image.load("Grafa/Statek1-Blue1.png")
 statekGrafika_1_mask=pygame.mask.from_surface(statekGrafika_1)
 statekGrafika_1_rect=statekGrafika_1.get_rect()
-statekGrafika_2 = pygame.image.load("Statek1-Red.png")
+statekGrafika_2 = pygame.image.load("Grafa/Statek1-Red1.png")
 statekGrafika_2_mask=pygame.mask.from_surface(statekGrafika_2)
-pociskGrafika = pygame.image.load('pocisk.png').convert_alpha()
-pociskikolor.append(pygame.image.load('pocisk.png'))
-pociskikolor.append(pygame.image.load('pocisk2.png'))
-pociskikolor.append(pygame.image.load('pocisk3.png'))
+pociskGrafika = pygame.image.load('Grafa/pocisk.png').convert_alpha()
+pociskikolor.append(pygame.image.load('Grafa/pocisk.png'))
+pociskikolor.append(pygame.image.load('Grafa/pocisk2.png'))
+pociskikolor.append(pygame.image.load('Grafa/pocisk3.png'))
 
 
 pociskGrafika_mask=pygame.mask.from_surface(pociskGrafika)
-life = pygame.image.load('life.png')
-music = pygame.mixer.music.load("pif.mp3")
+life = pygame.image.load('Grafa/life.png')
+music = pygame.mixer.music.load("Dźwięki/pif.mp3")
 
 
 
@@ -142,11 +144,11 @@ class Projectile():
             obraz.blit(self.image, [self.x, self.y])
     def siongracz1(self):
         if (self.istnieje == 1):
-            if statek_1.x<(self.x+12)<(statek_1.x+rozmiargracza_1) and statek_1.y<(self.y)<(statek_1.y+rozmiargracza_1) and self.vx<0:
+            if statek_1.x<(self.x+12)<(statek_1.x+rozmiargracza_1+17) and statek_1.y<(self.y)<(statek_1.y+rozmiargracza_1) and self.vx<0:
                 self.kolizja1=1
     def siongracz2(self):
         if (self.istnieje == 1):
-            if statek_2.x<(self.x)<(statek_2.x+rozmiargracza_2) and statek_2.y<(self.y)<(statek_2.y+rozmiargracza_2)and self.vx>0:
+            if statek_2.x+30<(self.x)<(statek_2.x++rozmiargracza_2) and statek_2.y<(self.y)<(statek_2.y+rozmiargracza_2)and self.vx>0:
                 self.kolizja2=1
     def outofmap(self):
         if self.x>szerokoscOkna or self.x<0:
@@ -162,6 +164,7 @@ def wynikNapis(killRed, killBlue):#funckja od wyswietlania wyniku
     napis = killRed + " : " + killBlue
     label = czcionka.render(napis, 1, kolorNapisu)
     obraz.blit(label, (szerokoscOkna / 2 - 60, 10))
+
 
 
 ################Pętla programu całego#######################
@@ -209,10 +212,10 @@ while True:
             click = pygame.mouse.get_pressed()
 
 
-            #tutaj idzie kod do menu z ustawiniami
-            #tutaj idzie kod do menu z ustawiniami
-            #tutaj idzie kod do menu z ustawiniami
-            #tutaj idzie kod do menu z ustawiniami
+            #tutaj idzie kod do pustego menu
+            #tutaj idzie kod do pustego menu
+            #tutaj idzie kod do pustego menu
+            #tutaj idzie kod do pustego menu
 
 
             if szerokoscOkna-220 < mouse[0] < szerokoscOkna and wysokoscOkna-36 < mouse[1] < wysokoscOkna:
@@ -271,7 +274,7 @@ while True:
 
 
             rozrzut = random.randint(-20, 20)#róra randomizacja rorzuty góra dół
-            rand = random.randint(1, 2)#randomizacja koloru pocisków
+            rand = random.randint(1, 1)#randomizacja koloru pocisków
 
 
             # poruszanie sie
@@ -299,7 +302,7 @@ while True:
                 zyciegracza1-=1
                 zyciegracza2+=1
 
-
+            obraz.blit(tabela,[szerokoscOkna/2-100, 10])
             wynikNapis(killRed,killBlue)#wywołanie wyniku
 
             obraz.blit(statekGrafika_1, [statek_1.x, statek_1.y])#to tutaj sa nasze statki, pamiętaj
@@ -341,7 +344,7 @@ while True:
                 my_missile_list.append(Projectile(shotplayer1x, shotplayer1y, 2.7, 0, rozrzut+(75*ruchyWS())))
                 pygame.mixer.music.play(0)
                 pygame.mixer.music.play(1)
-                timer_strzalu += 13
+                timer_strzalu += 0
             #gracz 2)
             if pygame.key.get_pressed()[pygame.K_p] and timer_strzalu2 < 2:
                 rand = random.randint(0,0)
@@ -351,7 +354,7 @@ while True:
                 my_missile_list.append(Projectile(shotplayer2x, shotplayer2y + 23, -2.54, 0, rozrzut+0.2+(75*ruchyUD())))
                 pygame.mixer.music.play(0)
                 pygame.mixer.music.play(1)
-                timer_strzalu2 += 41
+                timer_strzalu2 += 20
 
             obraz.blit(life, [zyciegracza1, 0])
             obraz.blit(life, [zyciegracza2, 0])
