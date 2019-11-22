@@ -4,6 +4,7 @@
     <extensionMap>
       <mapping pattern="*.js.flow" type="Flow" />
       <mapping pattern="*.js.flow" type="Flow" />
+      <mapping pattern="Moduł_tworzenia_kopizapasowej" type="Python" />
     </extensionMap>
   </component>
 </application>
